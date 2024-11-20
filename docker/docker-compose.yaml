@@ -262,7 +262,7 @@ x-shared-env: &shared-api-worker-env
   POSITION_PROVIDER_PINS: ${POSITION_PROVIDER_PINS:-}
   POSITION_PROVIDER_INCLUDES: ${POSITION_PROVIDER_INCLUDES:-}
   POSITION_PROVIDER_EXCLUDES: ${POSITION_PROVIDER_EXCLUDES:-}
-  MAX_VARIABLE_SIZE: ${MAX_VARIABLE_SIZE:-204800}
+  MAX_VARIABLE_SIZE: ${MAX_VARIABLE_SIZE:-500000}
   OCEANBASE_VECTOR_HOST: ${OCEANBASE_VECTOR_HOST:-http://oceanbase-vector}
   OCEANBASE_VECTOR_PORT: ${OCEANBASE_VECTOR_PORT:-2881}
   OCEANBASE_VECTOR_USER: ${OCEANBASE_VECTOR_USER:-root@test}
@@ -289,6 +289,8 @@ services:
     networks:
       - ssrf_proxy_network
       - default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   # worker service
   # The Celery worker for processing the queue.
